@@ -1,0 +1,33 @@
+.full {
+    height: 100%;
+    width: 100%;
+}
+.center {
+    width: 80%;
+    margin: auto;
+    margin-top: 5em;
+    box-sizing: border-box;
+    background-color: aliceblue;
+    display: flex;
+}
+.box {
+    flex: 1;
+    display: inline;
+    padding-bottom: 1em;
+}
+.border {
+    border-right: 2px solid black;
+}
+select {
+    display: block;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-size: 1em;
+}
+textarea {
+    margin-top: 1.5em;
+    margin-left: 1.5em;
+    height: 5em;
+    width: 80%;
+    font-size: 2em;
+}
