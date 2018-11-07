@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { parseDictionary } = require("./parse-dictionary");
+const { getTranslation } = require("./get-translation");
 const { MongoClient } = require("mongodb");
 const app = express();
 
@@ -12,24 +13,22 @@ MongoClient.connect(
     { useNewUrlParser: true }
 )
     .then(client => client.db("lab4"))
-    .then(db => db.collection("dictionaries"))
+    .then(db => db.collection("dictionary"))
     .then(col => {
         app.post("/translation", (req, res) => {
+            // TODO: fix this
             const { origin, translation, textarea } = req.body;
-            col.findOne({ _id: `${origin}-${translation}` }).then(doc => {
-                res.json({ found: doc.map[textarea] });
-            })
+            getTranslation(origin, translation, textarea, col).then(response => {
+                return res.json({ response })
+            });
         });
 
         app.post("/update", (req, res) => {
             const { origin, translation, textinput } = req.body;
-            const map = parseDictionary(textinput);
-            // change method?
-            col.insertOne({ _id: `${origin}-${translation}`, map }).then(
-                status => {
-                    res.json({ update: status });
-                }
-            );
+            const entries = parseDictionary(origin, translation, textinput);
+            col.insertMany(entries, { ordered: false }).then(record => {
+                return res.json({ update: record })
+            });
         });
 
         app.listen("5000", () => {

@@ -28,11 +28,11 @@ class Updater extends Component {
         const { name, value } = ev.target;
         this.setState({ [name]: value });
     };
-    postText = text => {
+    postText = textinput => {
         const { origin, translation } = this.state;
         fetch("/update", {
             method: "post",
-            body: JSON.stringify({ origin, translation, text }), // need stringify?
+            body: JSON.stringify({ origin, translation, textinput }), // need stringify?
             headers: {
                 "content-type": "application/json"
             }
