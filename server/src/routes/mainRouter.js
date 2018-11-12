@@ -8,12 +8,16 @@ const router = Router();
 // get available languages
 router.get("/options", (req, res) => {
     const { database } = req;
-    database
-        .then(db => db.collection("info"))
-        .then(col => col.findOne({ name: "options" }))
-        .then(options => {
-            return res.json({ options: options.available });
-        });
+    try {
+        database
+            .then(db => db.collection("info"))
+            .then(col => col.findOne({ name: "options" }))
+            .then(options => {
+                return res.json({ options: options.available });
+            });
+    } catch {
+        return res.json({ options: [] });
+    }
 });
 
 // update dictionary collection with new dictionary file
