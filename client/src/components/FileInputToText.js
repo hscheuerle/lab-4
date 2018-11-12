@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class FileInputToText extends Component {
+    static propTypes = {
+        onText: PropTypes.func.isRequired
+    };
+
     componentDidMount = () => {
         const { onText } = this.props;
 
@@ -9,7 +14,7 @@ class FileInputToText extends Component {
             const { result } = ev.target;
             onText(result);
         };
-    }
+    };
 
     render() {
         return <input type="file" onChange={this.onChange} />;

@@ -1,0 +1,1 @@
+const notNull = (...args) => args.reduce((acc, cur) => acc && cur, true)

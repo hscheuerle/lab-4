@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "scripts": {
         "start": "concurrently 'npm run server:start' 'npm run client:start'",
-        "server:start": "NODE_ENV=development nodemon ./src/index.js",
+        "server:start": "NODE_ENV=development nodemon ./bin/www.js",
         "client:start": "npm start --prefix ../client",
         "mongod:start": "mongod --dbpath=./db --logpath=./db/mongod.log --port=27017 --fork",
         "mongod:stop": "mongo admin --eval='db.shutdownServer();'"
